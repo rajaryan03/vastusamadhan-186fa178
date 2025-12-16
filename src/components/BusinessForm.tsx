@@ -8,7 +8,6 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import {
   Form,
   FormControl,
@@ -135,14 +134,16 @@ export function BusinessForm() {
             name="name"
             render={({ field }) => (
               <FormItem className="animate-fade-in" style={{ animationDelay: "0.1s" }}>
-                <FormLabel className="flex items-center gap-2 text-foreground font-medium">
-                  <User className="w-4 h-4 text-primary" />
+                <FormLabel className="flex items-center gap-2 text-foreground font-medium text-sm">
+                  <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center">
+                    <User className="w-4 h-4 text-primary" />
+                  </div>
                   Full Name
                 </FormLabel>
                 <FormControl>
                   <Input
                     placeholder="Enter your full name"
-                    className="bg-card border-border/50 focus:border-primary/50 transition-all duration-300 h-12"
+                    className="bg-background/50 border-border/60 focus:border-primary/60 focus:ring-2 focus:ring-primary/20 transition-all duration-300 h-12 rounded-xl"
                     {...field}
                   />
                 </FormControl>
@@ -152,21 +153,23 @@ export function BusinessForm() {
           />
 
           {/* Phone & Email Row */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             <FormField
               control={form.control}
               name="phone"
               render={({ field }) => (
                 <FormItem className="animate-fade-in" style={{ animationDelay: "0.15s" }}>
-                  <FormLabel className="flex items-center gap-2 text-foreground font-medium">
-                    <Phone className="w-4 h-4 text-primary" />
+                  <FormLabel className="flex items-center gap-2 text-foreground font-medium text-sm">
+                    <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center">
+                      <Phone className="w-4 h-4 text-primary" />
+                    </div>
                     Phone Number
                   </FormLabel>
                   <FormControl>
                     <Input
                       placeholder="+91 98765 43210"
                       type="tel"
-                      className="bg-card border-border/50 focus:border-primary/50 transition-all duration-300 h-12"
+                      className="bg-background/50 border-border/60 focus:border-primary/60 focus:ring-2 focus:ring-primary/20 transition-all duration-300 h-12 rounded-xl"
                       {...field}
                     />
                   </FormControl>
@@ -180,15 +183,17 @@ export function BusinessForm() {
               name="email"
               render={({ field }) => (
                 <FormItem className="animate-fade-in" style={{ animationDelay: "0.2s" }}>
-                  <FormLabel className="flex items-center gap-2 text-foreground font-medium">
-                    <Mail className="w-4 h-4 text-primary" />
+                  <FormLabel className="flex items-center gap-2 text-foreground font-medium text-sm">
+                    <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center">
+                      <Mail className="w-4 h-4 text-primary" />
+                    </div>
                     Email Address
                   </FormLabel>
                   <FormControl>
                     <Input
                       placeholder="your@email.com"
                       type="email"
-                      className="bg-card border-border/50 focus:border-primary/50 transition-all duration-300 h-12"
+                      className="bg-background/50 border-border/60 focus:border-primary/60 focus:ring-2 focus:ring-primary/20 transition-all duration-300 h-12 rounded-xl"
                       {...field}
                     />
                   </FormControl>
@@ -204,8 +209,10 @@ export function BusinessForm() {
             name="floorPlan"
             render={({ field: { onChange, value, ...field } }) => (
               <FormItem className="animate-fade-in" style={{ animationDelay: "0.25s" }}>
-                <FormLabel className="flex items-center gap-2 text-foreground font-medium">
-                  <Upload className="w-4 h-4 text-primary" />
+                <FormLabel className="flex items-center gap-2 text-foreground font-medium text-sm">
+                  <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center">
+                    <Upload className="w-4 h-4 text-primary" />
+                  </div>
                   Floor Plan
                 </FormLabel>
                 <FormControl>
@@ -213,11 +220,17 @@ export function BusinessForm() {
                     <div
                       onClick={() => fileInputRef.current?.click()}
                       className={cn(
-                        "border-2 border-dashed rounded-lg p-6 cursor-pointer transition-all duration-300 text-center",
-                        "hover:border-primary/50 hover:bg-secondary/30",
-                        selectedFile ? "border-primary/50 bg-secondary/20" : "border-border/50 bg-card"
+                        "border-2 border-dashed rounded-2xl p-8 cursor-pointer transition-all duration-300 text-center relative overflow-hidden group",
+                        "hover:border-primary/50 hover:bg-primary/5",
+                        selectedFile ? "border-primary/50 bg-primary/5" : "border-border/60 bg-background/30"
                       )}
                     >
+                      {/* Decorative corners */}
+                      <div className="absolute top-2 left-2 text-primary/20 text-xs">✦</div>
+                      <div className="absolute top-2 right-2 text-primary/20 text-xs">✦</div>
+                      <div className="absolute bottom-2 left-2 text-primary/20 text-xs">✦</div>
+                      <div className="absolute bottom-2 right-2 text-primary/20 text-xs">✦</div>
+                      
                       <input
                         ref={fileInputRef}
                         type="file"
@@ -233,19 +246,21 @@ export function BusinessForm() {
                         {...field}
                       />
                       {selectedFile ? (
-                        <div className="flex items-center justify-center gap-3">
-                          <FileImage className="w-8 h-8 text-primary" />
+                        <div className="flex items-center justify-center gap-4">
+                          <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center">
+                            <FileImage className="w-7 h-7 text-primary" />
+                          </div>
                           <div className="text-left">
-                            <p className="text-sm font-medium text-foreground">{selectedFile.name}</p>
+                            <p className="text-sm font-semibold text-foreground">{selectedFile.name}</p>
                             <p className="text-xs text-muted-foreground">
-                              {(selectedFile.size / 1024 / 1024).toFixed(2)} MB
+                              {(selectedFile.size / 1024 / 1024).toFixed(2)} MB • Ready for analysis
                             </p>
                           </div>
                           <Button
                             type="button"
                             variant="ghost"
                             size="icon"
-                            className="ml-2 hover:bg-destructive/10 hover:text-destructive"
+                            className="ml-2 hover:bg-destructive/10 hover:text-destructive rounded-xl"
                             onClick={(e) => {
                               e.stopPropagation();
                               setSelectedFile(null);
@@ -257,13 +272,15 @@ export function BusinessForm() {
                           </Button>
                         </div>
                       ) : (
-                        <div className="space-y-2">
-                          <FileImage className="w-10 h-10 mx-auto text-muted-foreground" />
-                          <p className="text-sm text-muted-foreground">
-                            Click to upload your floor plan
+                        <div className="space-y-3">
+                          <div className="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br from-primary/15 to-primary/5 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                            <FileImage className="w-8 h-8 text-primary/70" />
+                          </div>
+                          <p className="text-sm font-medium text-foreground">
+                            Drop your floor plan here
                           </p>
-                          <p className="text-xs text-muted-foreground/70">
-                            JPG, PNG, WEBP or PDF (max 10MB)
+                          <p className="text-xs text-muted-foreground">
+                            or click to browse (PNG, JPG, PDF)
                           </p>
                         </div>
                       )}
@@ -281,8 +298,10 @@ export function BusinessForm() {
             name="dateOfBirth"
             render={({ field }) => (
               <FormItem className="flex flex-col animate-fade-in" style={{ animationDelay: "0.3s" }}>
-                <FormLabel className="flex items-center gap-2 text-foreground font-medium">
-                  <CalendarIcon className="w-4 h-4 text-primary" />
+                <FormLabel className="flex items-center gap-2 text-foreground font-medium text-sm">
+                  <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center">
+                    <CalendarIcon className="w-4 h-4 text-primary" />
+                  </div>
                   Date of Birth
                 </FormLabel>
                 <Popover>
@@ -291,16 +310,16 @@ export function BusinessForm() {
                       <Button
                         variant="outline"
                         className={cn(
-                          "w-full h-12 justify-start text-left font-normal bg-card border-border/50 hover:bg-secondary/50",
+                          "w-full h-12 justify-start text-left font-normal bg-background/50 border-border/60 hover:bg-primary/5 hover:border-primary/40 rounded-xl",
                           !field.value && "text-muted-foreground"
                         )}
                       >
-                        <CalendarIcon className="mr-2 h-4 w-4" />
+                        <CalendarIcon className="mr-3 h-4 w-4 text-primary/70" />
                         {field.value ? format(field.value, "PPP") : "Select your birth date"}
                       </Button>
                     </FormControl>
                   </PopoverTrigger>
-                  <PopoverContent className="w-auto p-0 bg-popover border-border" align="start">
+                  <PopoverContent className="w-auto p-0 bg-popover border-border rounded-xl shadow-elevated" align="start">
                     <Calendar
                       mode="single"
                       selected={field.value}
@@ -309,7 +328,7 @@ export function BusinessForm() {
                         date > new Date() || date < new Date("1900-01-01")
                       }
                       initialFocus
-                      className="pointer-events-auto"
+                      className="pointer-events-auto rounded-xl"
                     />
                   </PopoverContent>
                 </Popover>
@@ -324,20 +343,22 @@ export function BusinessForm() {
             name="timeOfBirth"
             render={({ field }) => (
               <FormItem className="animate-fade-in" style={{ animationDelay: "0.35s" }}>
-                <FormLabel className="flex items-center gap-2 text-foreground font-medium">
-                  <Clock className="w-4 h-4 text-primary" />
+                <FormLabel className="flex items-center gap-2 text-foreground font-medium text-sm">
+                  <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center">
+                    <Clock className="w-4 h-4 text-primary" />
+                  </div>
                   Time of Birth
-                  <span className="text-muted-foreground text-xs font-normal">(Optional)</span>
+                  <span className="text-muted-foreground text-xs font-normal ml-1">(Optional)</span>
                 </FormLabel>
                 <FormControl>
                   <Input
                     type="time"
-                    className="bg-card border-border/50 focus:border-primary/50 transition-all duration-300 h-12"
+                    className="bg-background/50 border-border/60 focus:border-primary/60 focus:ring-2 focus:ring-primary/20 transition-all duration-300 h-12 rounded-xl"
                     {...field}
                   />
                 </FormControl>
-                <FormDescription className="text-muted-foreground text-sm">
-                  If known, this helps with precise calculations
+                <FormDescription className="text-muted-foreground text-xs mt-2">
+                  If known, this helps with precise Kundli calculations
                 </FormDescription>
                 <FormMessage />
               </FormItem>
@@ -350,22 +371,24 @@ export function BusinessForm() {
             name="placeOfBirth"
             render={({ field }) => (
               <FormItem className="animate-fade-in" style={{ animationDelay: "0.4s" }}>
-                <FormLabel className="flex items-center gap-2 text-foreground font-medium">
-                  <MapPin className="w-4 h-4 text-primary" />
+                <FormLabel className="flex items-center gap-2 text-foreground font-medium text-sm">
+                  <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center">
+                    <MapPin className="w-4 h-4 text-primary" />
+                  </div>
                   Place of Birth
                 </FormLabel>
                 <Select onValueChange={field.onChange} defaultValue={field.value}>
                   <FormControl>
-                    <SelectTrigger className="h-12 bg-card border-border/50 focus:border-primary/50">
+                    <SelectTrigger className="h-12 bg-background/50 border-border/60 focus:border-primary/60 focus:ring-2 focus:ring-primary/20 rounded-xl">
                       <SelectValue placeholder="Select your birth state" />
                     </SelectTrigger>
                   </FormControl>
-                  <SelectContent className="bg-popover border-border max-h-[300px]">
+                  <SelectContent className="bg-popover border-border max-h-[300px] rounded-xl shadow-elevated">
                     {indianStates.map((state) => (
                       <SelectItem
                         key={state}
                         value={state}
-                        className="hover:bg-secondary focus:bg-secondary cursor-pointer"
+                        className="hover:bg-primary/10 focus:bg-primary/10 cursor-pointer rounded-lg"
                       >
                         {state}
                       </SelectItem>
@@ -377,17 +400,26 @@ export function BusinessForm() {
             )}
           />
 
+          {/* Ornate Divider */}
+          <div className="flex items-center justify-center gap-3 py-4">
+            <div className="w-12 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
+            <span className="text-primary/40 text-xs">✦</span>
+            <span className="text-primary/60">❁</span>
+            <span className="text-primary/40 text-xs">✦</span>
+            <div className="w-12 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
+          </div>
+
           {/* Submit Button */}
-          <div className="pt-4 animate-fade-in" style={{ animationDelay: "0.45s" }}>
+          <div className="animate-fade-in" style={{ animationDelay: "0.45s" }}>
             <Button
               type="submit"
               disabled={isSubmitting}
-              className="w-full h-14 text-lg font-semibold bg-primary hover:bg-primary/90 text-primary-foreground shadow-elevated hover:shadow-glow transition-all duration-300 group"
+              className="w-full h-14 text-base font-semibold bg-gradient-to-r from-primary to-primary/90 hover:from-primary/95 hover:to-primary/85 text-primary-foreground shadow-soft hover:shadow-glow transition-all duration-300 group rounded-xl"
             >
               {isSubmitting ? (
                 <>
-                  <div className="w-5 h-5 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin mr-2" />
-                  Submitting...
+                  <div className="w-5 h-5 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin mr-3" />
+                  Analyzing Cosmic Energies...
                 </>
               ) : (
                 <>

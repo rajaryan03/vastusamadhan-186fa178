@@ -6,98 +6,99 @@
 
 @layer base {
   :root {
-    /* Ancient-Modern Indian Palette */
-    --background: 35 30% 96%;
-    --foreground: 20 25% 15%;
+    /* Vastu Samadhan Light Theme - Warm Cream */
+    --background: 40 30% 97%;
+    --foreground: 20 30% 12%;
 
-    --card: 35 35% 98%;
-    --card-foreground: 20 25% 15%;
+    --card: 40 40% 99%;
+    --card-foreground: 20 30% 12%;
 
-    --popover: 35 35% 98%;
-    --popover-foreground: 20 25% 15%;
+    --popover: 40 40% 99%;
+    --popover-foreground: 20 30% 12%;
 
-    /* Rich Terracotta Primary */
-    --primary: 15 65% 45%;
-    --primary-foreground: 35 30% 98%;
+    /* Amber/Gold Primary (matching #F59E0B) */
+    --primary: 38 92% 50%;
+    --primary-foreground: 20 30% 8%;
 
     /* Warm Sand Secondary */
-    --secondary: 35 25% 88%;
+    --secondary: 38 30% 92%;
     --secondary-foreground: 20 25% 20%;
 
     /* Muted Earthy Tones */
-    --muted: 35 20% 90%;
-    --muted-foreground: 20 15% 45%;
+    --muted: 38 20% 94%;
+    --muted-foreground: 20 15% 40%;
 
     /* Gold Accent */
-    --accent: 42 75% 55%;
-    --accent-foreground: 20 25% 12%;
+    --accent: 38 92% 50%;
+    --accent-foreground: 20 30% 8%;
 
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 30 20% 82%;
-    --input: 30 20% 85%;
-    --ring: 15 65% 45%;
+    --border: 38 25% 88%;
+    --input: 38 25% 92%;
+    --ring: 38 92% 50%;
 
     --radius: 0.75rem;
 
-    /* Custom Design Tokens */
-    --gradient-warm: linear-gradient(135deg, hsl(35 30% 96%) 0%, hsl(30 25% 92%) 100%);
-    --gradient-gold: linear-gradient(135deg, hsl(42 75% 55%) 0%, hsl(35 70% 50%) 100%);
-    --gradient-terracotta: linear-gradient(135deg, hsl(15 65% 45%) 0%, hsl(10 60% 38%) 100%);
+    /* Custom Design Tokens - Vastu Style */
+    --gradient-warm: linear-gradient(180deg, hsl(40 30% 97%) 0%, hsl(38 25% 94%) 100%);
+    --gradient-gold: linear-gradient(135deg, hsl(38 92% 50%) 0%, hsl(36 85% 45%) 100%);
+    --gradient-gold-shimmer: linear-gradient(135deg, hsl(38 92% 50%) 0%, hsl(45 90% 60%) 40%, hsl(38 92% 50%) 100%);
     
-    --shadow-soft: 0 4px 20px -4px hsl(20 25% 15% / 0.08);
-    --shadow-elevated: 0 12px 40px -8px hsl(20 25% 15% / 0.12);
-    --shadow-glow: 0 0 30px hsl(42 75% 55% / 0.2);
+    --shadow-soft: 0 4px 20px -4px hsl(38 92% 50% / 0.1);
+    --shadow-elevated: 0 12px 40px -8px hsl(20 30% 12% / 0.08);
+    --shadow-glow: 0 0 40px hsl(38 92% 50% / 0.15);
+    --shadow-card: 0 8px 32px -8px hsl(38 92% 50% / 0.12);
 
-    /* Sidebar (keeping defaults) */
-    --sidebar-background: 35 30% 96%;
+    /* Sidebar */
+    --sidebar-background: 40 30% 97%;
     --sidebar-foreground: 20 25% 25%;
-    --sidebar-primary: 15 65% 45%;
-    --sidebar-primary-foreground: 35 30% 98%;
-    --sidebar-accent: 35 25% 90%;
+    --sidebar-primary: 38 92% 50%;
+    --sidebar-primary-foreground: 20 30% 8%;
+    --sidebar-accent: 38 30% 92%;
     --sidebar-accent-foreground: 20 25% 20%;
-    --sidebar-border: 30 20% 85%;
-    --sidebar-ring: 15 65% 45%;
+    --sidebar-border: 38 25% 88%;
+    --sidebar-ring: 38 92% 50%;
   }
 
   .dark {
-    --background: 20 20% 8%;
-    --foreground: 35 20% 92%;
+    --background: 20 20% 6%;
+    --foreground: 40 20% 95%;
 
-    --card: 20 18% 12%;
-    --card-foreground: 35 20% 92%;
+    --card: 20 18% 10%;
+    --card-foreground: 40 20% 95%;
 
-    --popover: 20 18% 12%;
-    --popover-foreground: 35 20% 92%;
+    --popover: 20 18% 10%;
+    --popover-foreground: 40 20% 95%;
 
-    --primary: 15 60% 55%;
-    --primary-foreground: 20 20% 8%;
+    --primary: 38 92% 50%;
+    --primary-foreground: 20 20% 6%;
 
-    --secondary: 20 15% 18%;
-    --secondary-foreground: 35 20% 90%;
+    --secondary: 20 15% 15%;
+    --secondary-foreground: 40 20% 90%;
 
-    --muted: 20 15% 20%;
-    --muted-foreground: 35 15% 60%;
+    --muted: 20 15% 18%;
+    --muted-foreground: 40 15% 55%;
 
-    --accent: 42 70% 50%;
-    --accent-foreground: 20 20% 8%;
+    --accent: 38 92% 50%;
+    --accent-foreground: 20 20% 6%;
 
     --destructive: 0 62% 45%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 20 15% 22%;
-    --input: 20 15% 22%;
-    --ring: 15 60% 55%;
+    --border: 20 15% 20%;
+    --input: 20 15% 20%;
+    --ring: 38 92% 50%;
 
-    --sidebar-background: 20 20% 10%;
-    --sidebar-foreground: 35 20% 90%;
-    --sidebar-primary: 15 60% 55%;
-    --sidebar-primary-foreground: 20 20% 8%;
-    --sidebar-accent: 20 15% 16%;
-    --sidebar-accent-foreground: 35 20% 90%;
-    --sidebar-border: 20 15% 18%;
-    --sidebar-ring: 15 60% 55%;
+    --sidebar-background: 20 20% 8%;
+    --sidebar-foreground: 40 20% 90%;
+    --sidebar-primary: 38 92% 50%;
+    --sidebar-primary-foreground: 20 20% 6%;
+    --sidebar-accent: 20 15% 14%;
+    --sidebar-accent-foreground: 40 20% 90%;
+    --sidebar-border: 20 15% 16%;
+    --sidebar-ring: 38 92% 50%;
   }
 }
 
@@ -117,34 +118,123 @@
 }
 
 @layer utilities {
+  /* Shimmer Gold Text - Like Vastu Samadhan */
   .text-gradient-gold {
-    background: linear-gradient(135deg, hsl(42 75% 55%) 0%, hsl(35 70% 50%) 100%);
+    background: linear-gradient(135deg, hsl(38 92% 50%) 0%, hsl(45 90% 65%) 40%, hsl(38 92% 50%) 100%);
+    background-size: 200% auto;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    animation: shimmer 3s linear infinite;
+  }
+
+  /* Mandala Background Pattern */
+  .bg-pattern-mandala {
+    background-image: 
+      radial-gradient(circle at center, transparent 30%, hsl(40 30% 97% / 0.8) 70%),
+      repeating-conic-gradient(from 0deg, transparent 0deg 10deg, hsl(38 92% 50% / 0.02) 10deg 20deg);
   }
 
   .bg-pattern-ancient {
     background-image: 
-      radial-gradient(circle at 25% 25%, hsl(42 75% 55% / 0.03) 0%, transparent 50%),
-      radial-gradient(circle at 75% 75%, hsl(15 65% 45% / 0.03) 0%, transparent 50%);
+      radial-gradient(circle at 20% 30%, hsl(38 92% 50% / 0.04) 0%, transparent 40%),
+      radial-gradient(circle at 80% 70%, hsl(38 92% 50% / 0.03) 0%, transparent 40%),
+      radial-gradient(circle at 50% 50%, hsl(38 30% 90% / 0.5) 0%, transparent 70%);
   }
 
+  /* Floating Animations */
   .animate-float {
     animation: float 6s ease-in-out infinite;
   }
 
+  .animate-float-slow {
+    animation: float 8s ease-in-out infinite;
+  }
+
   .animate-shimmer {
-    animation: shimmer 3s ease-in-out infinite;
+    animation: shimmer 3s linear infinite;
+  }
+
+  .animate-spin-slow {
+    animation: spin-slow 120s linear infinite;
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  /* Diya Float Animation */
+  .animate-diya {
+    animation: diya-float 4s ease-in-out infinite;
+  }
+
+  /* Card Hover Effect */
+  .card-hover {
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .card-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-glow);
+  }
+
+  /* Ornate Border */
+  .border-ornate {
+    border-image: linear-gradient(135deg, hsl(38 92% 50% / 0.3), hsl(38 92% 50% / 0.1), hsl(38 92% 50% / 0.3)) 1;
+  }
+
+  /* Glassmorphism */
+  .glass {
+    background: hsl(40 40% 99% / 0.8);
+    backdrop-filter: blur(12px);
+    border: 1px solid hsl(38 92% 50% / 0.15);
   }
 }
 
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+  50% { transform: translateY(-15px); }
 }
 
 @keyframes shimmer {
-  0%, 100% { opacity: 0.5; }
-  50% { opacity: 1; }
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { 
+    opacity: 0.6; 
+    filter: drop-shadow(0 0 8px hsl(38 92% 50% / 0.4));
+  }
+  50% { 
+    opacity: 1; 
+    filter: drop-shadow(0 0 16px hsl(38 92% 50% / 0.6));
+  }
+}
+
+@keyframes diya-float {
+  0%, 100% { 
+    transform: translateY(0) scale(1); 
+    opacity: 0.6; 
+  }
+  50% { 
+    transform: translateY(-12px) scale(1.05); 
+    opacity: 0.9; 
+  }
+}
+
+@keyframes twinkle {
+  0%, 100% { 
+    opacity: 0.3; 
+    transform: scale(1); 
+  }
+  50% { 
+    opacity: 1; 
+    transform: scale(1.3); 
+  }
 }
