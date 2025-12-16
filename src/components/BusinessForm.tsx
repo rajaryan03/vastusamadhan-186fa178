@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { format } from "date-fns";
+import { useNavigate } from "react-router-dom";
 import { CalendarIcon, Send, Sparkles, User, Phone, Mail, Upload, MapPin, Clock, FileImage, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -55,6 +56,7 @@ export function BusinessForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const navigate = useNavigate();
 
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
@@ -116,13 +118,8 @@ export function BusinessForm() {
         time_on_page: null,
       });
 
-      toast({
-        title: "✨ Form Submitted Successfully",
-        description: "Thank you for your submission. We'll be in touch soon!",
-      });
-      
-      form.reset();
-      setSelectedFile(null);
+      // Redirect to success page
+      navigate("/success");
     } catch (error) {
       console.error("Submission error:", error);
       toast({
