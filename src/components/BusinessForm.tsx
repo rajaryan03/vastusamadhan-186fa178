@@ -254,7 +254,6 @@ export function BusinessForm() {
                             onChange(file);
                           }
                         }}
-                        {...field}
                       />
                       {selectedFile ? (
                         <div className="flex items-center justify-center gap-4">
