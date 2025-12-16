@@ -32,6 +32,7 @@ import {
 } from "@/components/ui/select";
 import { toast } from "@/hooks/use-toast";
 import { indianStates } from "@/data/indianStates";
+import { supabase } from "@/integrations/supabase/client";
 
 const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
 const ACCEPTED_FILE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp", "application/pdf"];
@@ -70,19 +71,58 @@ export function BusinessForm() {
   async function onSubmit(data: FormData) {
     setIsSubmitting(true);
     
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    
-    console.log("Form submitted:", data);
-    
-    toast({
-      title: "✨ Form Submitted Successfully",
-      description: "Thank you for your submission. We'll be in touch soon!",
-    });
-    
-    form.reset();
-    setSelectedFile(null);
-    setIsSubmitting(false);
+    try {
+      // Upload floor plan to storage
+      const fileExt = data.floorPlan.name.split('.').pop();
+      const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`;
+      
+      const { data: uploadData, error: uploadError } = await supabase.storage
+        .from('floor-plans')
+        .upload(fileName, data.floorPlan);
+
+      if (uploadError) {
+        throw new Error(`Failed to upload floor plan: ${uploadError.message}`);
+      }
+
+      // Get public URL for the uploaded file
+      const { data: { publicUrl } } = supabase.storage
+        .from('floor-plans')
+        .getPublicUrl(fileName);
+
+      // Save form data to database
+      const { error: insertError } = await supabase
+        .from('business_registrations')
+        .insert({
+          name: data.name,
+          phone_number: data.phone,
+          email: data.email,
+          date_of_birth: format(data.dateOfBirth, 'yyyy-MM-dd'),
+          time_of_birth: data.timeOfBirth || null,
+          place_of_birth: data.placeOfBirth,
+          floor_plan_url: publicUrl,
+        });
+
+      if (insertError) {
+        throw new Error(`Failed to save registration: ${insertError.message}`);
+      }
+
+      toast({
+        title: "✨ Form Submitted Successfully",
+        description: "Thank you for your submission. We'll be in touch soon!",
+      });
+      
+      form.reset();
+      setSelectedFile(null);
+    } catch (error) {
+      console.error("Submission error:", error);
+      toast({
+        title: "Submission Failed",
+        description: error instanceof Error ? error.message : "Something went wrong. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
