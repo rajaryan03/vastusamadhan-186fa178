@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { format } from "date-fns";
-import { CalendarIcon, Send, Sparkles, User, Phone, Mail, Building, MapPin, Clock } from "lucide-react";
+import { CalendarIcon, Send, Sparkles, User, Phone, Mail, Upload, MapPin, Clock, FileImage, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -33,11 +33,17 @@ import {
 import { toast } from "@/hooks/use-toast";
 import { indianStates } from "@/data/indianStates";
 
+const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
+const ACCEPTED_FILE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp", "application/pdf"];
+
 const formSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters").max(100),
   phone: z.string().min(10, "Please enter a valid phone number").max(15),
   email: z.string().email("Please enter a valid email address"),
-  floorPlan: z.string().min(1, "Please enter your floor plan"),
+  floorPlan: z
+    .instanceof(File, { message: "Please upload your floor plan" })
+    .refine((file) => file.size <= MAX_FILE_SIZE, "File size must be less than 10MB")
+    .refine((file) => ACCEPTED_FILE_TYPES.includes(file.type), "Please upload an image (JPG, PNG, WEBP) or PDF"),
   dateOfBirth: z.date({ required_error: "Please select your date of birth" }),
   timeOfBirth: z.string().optional(),
   placeOfBirth: z.string().min(1, "Please select your place of birth"),
@@ -47,6 +53,8 @@ type FormData = z.infer<typeof formSchema>;
 
 export function BusinessForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
@@ -54,7 +62,6 @@ export function BusinessForm() {
       name: "",
       phone: "",
       email: "",
-      floorPlan: "",
       timeOfBirth: "",
       placeOfBirth: "",
     },
@@ -74,6 +81,7 @@ export function BusinessForm() {
     });
     
     form.reset();
+    setSelectedFile(null);
     setIsSubmitting(false);
   }
 
@@ -150,26 +158,78 @@ export function BusinessForm() {
             />
           </div>
 
-          {/* Floor Plan */}
+          {/* Floor Plan Upload */}
           <FormField
             control={form.control}
             name="floorPlan"
-            render={({ field }) => (
+            render={({ field: { onChange, value, ...field } }) => (
               <FormItem className="animate-fade-in" style={{ animationDelay: "0.25s" }}>
                 <FormLabel className="flex items-center gap-2 text-foreground font-medium">
-                  <Building className="w-4 h-4 text-primary" />
+                  <Upload className="w-4 h-4 text-primary" />
                   Floor Plan
                 </FormLabel>
                 <FormControl>
-                  <Input
-                    placeholder="e.g., 2BHK, 3BHK, Villa, etc."
-                    className="bg-card border-border/50 focus:border-primary/50 transition-all duration-300 h-12"
-                    {...field}
-                  />
+                  <div className="space-y-3">
+                    <div
+                      onClick={() => fileInputRef.current?.click()}
+                      className={cn(
+                        "border-2 border-dashed rounded-lg p-6 cursor-pointer transition-all duration-300 text-center",
+                        "hover:border-primary/50 hover:bg-secondary/30",
+                        selectedFile ? "border-primary/50 bg-secondary/20" : "border-border/50 bg-card"
+                      )}
+                    >
+                      <input
+                        ref={fileInputRef}
+                        type="file"
+                        accept=".jpg,.jpeg,.png,.webp,.pdf"
+                        className="hidden"
+                        onChange={(e) => {
+                          const file = e.target.files?.[0];
+                          if (file) {
+                            setSelectedFile(file);
+                            onChange(file);
+                          }
+                        }}
+                        {...field}
+                      />
+                      {selectedFile ? (
+                        <div className="flex items-center justify-center gap-3">
+                          <FileImage className="w-8 h-8 text-primary" />
+                          <div className="text-left">
+                            <p className="text-sm font-medium text-foreground">{selectedFile.name}</p>
+                            <p className="text-xs text-muted-foreground">
+                              {(selectedFile.size / 1024 / 1024).toFixed(2)} MB
+                            </p>
+                          </div>
+                          <Button
+                            type="button"
+                            variant="ghost"
+                            size="icon"
+                            className="ml-2 hover:bg-destructive/10 hover:text-destructive"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setSelectedFile(null);
+                              onChange(undefined);
+                              if (fileInputRef.current) fileInputRef.current.value = "";
+                            }}
+                          >
+                            <X className="w-4 h-4" />
+                          </Button>
+                        </div>
+                      ) : (
+                        <div className="space-y-2">
+                          <FileImage className="w-10 h-10 mx-auto text-muted-foreground" />
+                          <p className="text-sm text-muted-foreground">
+                            Click to upload your floor plan
+                          </p>
+                          <p className="text-xs text-muted-foreground/70">
+                            JPG, PNG, WEBP or PDF (max 10MB)
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  </div>
                 </FormControl>
-                <FormDescription className="text-muted-foreground text-sm">
-                  Describe your property type or floor plan
-                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
