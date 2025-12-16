@@ -1,6 +1,9 @@
 import { BusinessForm } from "@/components/BusinessForm";
+import { usePageAnalytics } from "@/hooks/usePageAnalytics";
 
 const Index = () => {
+  // Track page views and bounces
+  usePageAnalytics();
   return (
     <div className="min-h-screen bg-background bg-pattern-ancient relative overflow-hidden">
       {/* Mandala Background */}
