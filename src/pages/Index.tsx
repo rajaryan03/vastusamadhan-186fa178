@@ -64,11 +64,11 @@ const Index = () => {
             <span className="text-xl text-primary/40 font-serif scale-x-[-1]">☙</span>
           </div>
 
-          {/* Badge */}
+          {/* Credibility Badge */}
           <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-gradient-to-r from-primary/10 to-primary/5 border border-primary/20 mb-6">
             <span className="text-lg">🏛️</span>
-            <span className="text-sm font-medium text-foreground/80 tracking-wide uppercase">
-              Pre-Testing Registration
+            <span className="text-sm font-medium text-foreground/80 tracking-wide">
+              IIT Architects • Vastu Experts • 20+ Years Experience
             </span>
           </div>
           
