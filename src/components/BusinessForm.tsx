@@ -105,6 +105,17 @@ export function BusinessForm() {
         throw new Error(`Failed to save registration: ${insertError.message}`);
       }
 
+      // Track successful form submission for analytics
+      const sessionId = sessionStorage.getItem("analytics_session_id") || `${Date.now()}-${Math.random().toString(36).substring(7)}`;
+      await supabase.from("page_analytics").insert({
+        session_id: sessionId,
+        page_url: window.location.href,
+        referrer: document.referrer || null,
+        user_agent: navigator.userAgent,
+        event_type: "form_submit",
+        time_on_page: null,
+      });
+
       toast({
         title: "✨ Form Submitted Successfully",
         description: "Thank you for your submission. We'll be in touch soon!",
